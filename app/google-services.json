@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "121713509605",
+    "project_id": "localizeit-ab09e",
+    "storage_bucket": "localizeit-ab09e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121713509605:android:9be4714a0dc09f6985800c",
+        "android_client_info": {
+          "package_name": "com.example.localizeit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_wsaqFXFkMIIPBhQvyCPidD9nP0rtri4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
