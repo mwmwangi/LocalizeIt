@@ -1,81 +1,130 @@
+//package com.example.localizeit.ui.theme.Screens
+//
+//import androidx.compose.foundation.Image
+//import androidx.compose.foundation.background
 //import androidx.compose.foundation.layout.*
+//import androidx.compose.foundation.shape.RoundedCornerShape
+//import androidx.compose.foundation.pager.HorizontalPager
+//import androidx.compose.foundation.pager.rememberPagerState
 //import androidx.compose.material3.*
 //import androidx.compose.runtime.*
 //import androidx.compose.ui.Alignment
 //import androidx.compose.ui.Modifier
 //import androidx.compose.ui.graphics.Color
+//import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.text.font.FontWeight
 //import androidx.compose.ui.unit.dp
-//import androidx.navigation.NavController
-////import com.google.accompanist.kjpager.*
+//import androidx.compose.ui.unit.sp
+//import com.example.localizeit.R
 //import kotlinx.coroutines.launch
 //
-////@OptIn(ExperimentalPagerApi::class)
-//@Composable
-//fun OnboardingScreen(navController: NavController) { val pagerState = rememberPagerState()
-//    val scope = rememberCoroutineScope()
+//data class OnboardingPage(
+//    val title: String,
+//    val description: String,
+//    val imageRes: Int
+//)
 //
-//    val pages = listOf(
-//        OnboardingPage("Learn Skills Anywhere", "Access practical skills in your language, even offline."),
-//        OnboardingPage("Jobs & Resources", "Discover job openings and community tools near you."),
-//        OnboardingPage("Get Started", "Let’s build your journey today.")
+//val onboardingPages = listOf(
+//    OnboardingPage(
+//        title = "Learn Locally",
+//        description = "Access free courses tailored to your region.",
+//        imageRes = R.drawable.ic_school
+//    ),
+//    OnboardingPage(
+//        title = "Grow Skills",
+//        description = "Build skills in farming, health, business, and more.",
+//        imageRes = R.drawable.ic_skills
+//    ),
+//    OnboardingPage(
+//        title = "Get Connected",
+//        description = "Find local services and job opportunities.",
+//        imageRes = R.drawable.ic_connect
 //    )
+//)
 //
-//    Surface(
-//        modifier = Modifier.fillMaxSize(),
-//        color = Color(0xFF1E1E1E)
+//@Composable
+//fun OnboardingScreen(onFinish: () -> Unit) {
+//    val pagerState = rememberPagerState(initialPage = 0)
+//    val coroutineScope = rememberCoroutineScope()
+//
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .background(Color(0xFF121212))
+//            .padding(16.dp),
+//        verticalArrangement = Arrangement.SpaceBetween
 //    ) {
-//        Column(
+//        HorizontalPager(
+//            pageCount = onboardingPages.size,
+//            state = pagerState,
+//            modifier = Modifier.weight(1f)
+//        ) { page ->
+//            val onboarding = onboardingPages[page]
+//            Column(
+//                modifier = Modifier.fillMaxSize(),
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                verticalArrangement = Arrangement.Center
+//            ) {
+//                Image(
+//                    painter = painterResource(id = onboarding.imageRes),
+//                    contentDescription = onboarding.title,
+//                    modifier = Modifier.size(200.dp)
+//                )
+//                Spacer(modifier = Modifier.height(24.dp))
+//                Text(
+//                    text = onboarding.title,
+//                    fontSize = 24.sp,
+//                    fontWeight = FontWeight.Bold,
+//                    color = Color.White
+//                )
+//                Spacer(modifier = Modifier.height(12.dp))
+//                Text(
+//                    text = onboarding.description,
+//                    fontSize = 16.sp,
+//                    color = Color.LightGray,
+//                    modifier = Modifier.padding(horizontal = 24.dp),
+//                    lineHeight = 22.sp
+//                )
+//            }
+//        }
+//
+//        Row(
 //            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(24.dp),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
+//                .fillMaxWidth()
+//                .padding(bottom = 24.dp),
+//            horizontalArrangement = Arrangement.SpaceBetween,
+//            verticalAlignment = Alignment.CenterVertically
 //        ) {
-//            HorizontalPager(
-//                count = pages.size,
-//                state = pagerState,
-//                modifier = Modifier.weight(1f)
-//            ) { page ->
-//                Column(
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                    verticalArrangement = Arrangement.Center,
-//                    modifier = Modifier.fillMaxSize()
-//                ) {
-//                    Text(text = pages[page].title, color = Color.White, style = MaterialTheme.typography.headlineSmall)
-//                    Spacer(modifier = Modifier.height(16.dp))
-//                    Text(text = pages[page].description, color = Color(0xFFBBBBBB), style = MaterialTheme.typography.bodyLarge)
+//            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+//                repeat(onboardingPages.size) { index ->
+//                    val isSelected = pagerState.currentPage == index
+//                    Box(
+//                        modifier = Modifier
+//                            .size(if (isSelected) 12.dp else 8.dp)
+//                            .background(
+//                                if (isSelected) Color.White else Color.Gray,
+//                                shape = RoundedCornerShape(50)
+//                            )
+//                    )
 //                }
 //            }
 //
-//            Spacer(modifier = Modifier.height(24.dp))
-//
-//            HorizontalPagerIndicator(
-//                pagerState = pagerState,
-//                activeColor = Color(0xFF1EB980),
-//                inactiveColor = Color.Gray
-//            )
-//
-//            Spacer(modifier = Modifier.height(24.dp))
-//
 //            Button(
 //                onClick = {
-//                    if (pagerState.currentPage == pages.lastIndex) {
-//                        navController.navigate("dashboard") {
-//                            popUpTo("welcome") { inclusive = true }
-//                        }
-//
+//                    if (pagerState.currentPage == onboardingPages.lastIndex) {
+//                        onFinish()
 //                    } else {
-//                        scope.launch {
+//                        coroutineScope.launch {
 //                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
 //                        }
 //                    }
 //                },
-//                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1EB980))
+//                shape = RoundedCornerShape(12.dp)
 //            ) {
-//                Text(text = if (pagerState.currentPage == pages.lastIndex) "Get Started" else "Next")
+//                Text(
+//                    text = if (pagerState.currentPage == onboardingPages.lastIndex) "Get Started" else "Next"
+//                )
 //            }
 //        }
 //    }
 //}
-//
-//data class OnboardingPage(val title: String, val description: String)
